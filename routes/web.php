@@ -26,3 +26,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/redirect/{service}','SocialController@edirect');
 
 Route::get('/callback/{service}','SocialController@callback');
+
+
+
+Route::get('/fillable','CrudController@getoffers');
+
+
+Route::group(['prefix'=>'offers'],function(){
+
+    Route::get('form','CrudController@show_form');
+
+
+    Route::post('store','CrudController@store')->name('offers.store');
+
+
+});
