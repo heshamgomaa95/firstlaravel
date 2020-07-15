@@ -38,10 +38,10 @@ class CrudController extends Controller
             'details'=>'required'];
 
             $message=[
-                'name.required'=>trans('messagesname'),
-                'name.unique'=>trans('messages.unique'),
-                'price.numeric'=>trans('messagesprice.numeric'),
-                'price.required'=>trans('messagesprice.required')
+                'name.required'=>__('messages.messages_name'),
+                'name.unique'=>__('messages.messages_unique'),
+                'price.numeric'=>__('messages.messages_pricenumeric'),
+                'price.required'=>__('messages.messages_pricerequired')
             ];
 
 

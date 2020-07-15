@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                {{ __('passwords.user') }}
                 </div>
 
                 <div class="links">

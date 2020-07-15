@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'messagesname'=>'الاسم لازم يكون مكتوب',
-    'messages.unique'=>'الاسم موجود سابقا',
-    'messagesprice.numeric'=>'السعر لازم يكون رقم',
-    'messagesprice.required'=>'السعر لازم يكون مكتوب',
+    'messages_name'=>'الاسم لازم يكون مكتوب',
+    'messages_unique'=>'الاسم موجود سابقا',
+    'messages_pricenumeric'=>'السعر لازم يكون رقم',
+    'messages_pricerequired'=>'السعر لازم يكون مكتوب',
 
 ];

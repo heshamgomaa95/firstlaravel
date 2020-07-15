@@ -12,10 +12,13 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
+    'messages_name'=>'Offer name_required',
+    'messages_unique'=>'Offer name the same in database',
+    'messages_pricenumeric'=>'price insert numbers',
+    'messages_pricerequired'=>'price salary_requuired',
 
-    'messagesname'=>'Offer name_required',
-    'messages.unique'=>'Offer name the same in database',
-    'messagesprice.numeric'=>'price insert numbers',
-    'messagesprice.required'=>'price salary_requuired',
+
+
+
 
 ];

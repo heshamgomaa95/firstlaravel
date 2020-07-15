@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,12 +33,10 @@ Route::get('/callback/{service}','SocialController@callback');
 Route::get('/fillable','CrudController@getoffers');
 
 
-Route::group(['prefix'=>'offers'],function(){
+Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
 
-    Route::get('form','CrudController@show_form');
-
-
-    Route::post('store','CrudController@store')->name('offers.store');
-
-
+    Route::group(['prefix'=>'offers'],function(){
+        Route::get('form','CrudController@show_form');
+        Route::post('store','CrudController@store')->name('offers.store');
+    });
 });
