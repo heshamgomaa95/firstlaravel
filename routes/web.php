@@ -36,6 +36,7 @@ Route::get('/fillable','CrudController@getoffers');
 Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
 
     Route::group(['prefix'=>'offers'],function(){
+        Route::get('all','CrudController@getAllOffers');
         Route::get('form','CrudController@show_form');
         Route::post('store','CrudController@store')->name('offers.store');
     });

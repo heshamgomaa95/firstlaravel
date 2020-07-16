@@ -16,6 +16,7 @@ return [
     'messages_unique'=>'Offer name the same in database',
     'messages_pricenumeric'=>'price insert numbers',
     'messages_pricerequired'=>'price salary_requuired',
+    'name_form'=>'Add New Offer'
 
 
 
