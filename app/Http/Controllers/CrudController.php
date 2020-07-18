@@ -18,6 +18,40 @@ class CrudController extends Controller
     {
 
     }
+
+    public function editoffer($offer_id)
+    {
+       // Offer::findOrFail($offer_id);
+       $offer=Offer::find($offer_id);
+       if(!$offer){
+           return redirect()->back();
+       }else
+       {
+        $offer=Offer::select('id','name','price','details')->find($offer_id);
+        return view('offers.edit',compact('offer'));}
+    }
+
+
+    public function updateoffer(OfferRequest $request,$offer_id){
+        //validation request
+        // update
+
+        $offer=Offer::find($offer_id);
+        if(!$offer){
+            return redirect()->back();
+        }else
+        {
+            /* $offer->update([
+                'name'=>$request->name,
+                'price'=>$request->price
+            ]); */
+            $offer->update($request->all());
+            return redirect()->back()->with(['success'=>'تم التحديث ينجاح']);
+        }
+    }
+
+
+
     public function getoffers(){
        return Offer::get();
     // return Offer::select('id','name')->get();
@@ -47,10 +81,16 @@ class CrudController extends Controller
       //   }
 
 
+      // save photo in folder
+
+      $path_file='images/offers';
+      $file_name= $this->saveImage($request->photo, $path_file);
+
         Offer::create([
             'name'=>$request->name,
             'price'=>$request->price,
-            'details'=>$request->details
+            'details'=>$request->details,
+            'photo'=>$file_name
             ]);
 
        // return 'save successfuly';
@@ -58,6 +98,13 @@ class CrudController extends Controller
 
     }
 
+    protected function saveImage($photo,$folder){
+        $file_extension = $photo->photo->getClientOriginalExtension();
+        $file_name=time().'.'.$file_extension;
+        $path=$folder;
+        $photo->photo->move($path,$file_name);
+        return $file_name;
+    }
    /* protected function get_rules_validaation(){
         return $rules_validaation=[
             'name'=>'required|max:100|unique:offers,name',
@@ -75,4 +122,10 @@ class CrudController extends Controller
 
     }
     */
+
+
+
+
+
+
 }

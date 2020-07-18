@@ -17,5 +17,6 @@ return [
     'messages_unique'=>'الاسم موجود سابقا',
     'messages_pricenumeric'=>'السعر لازم يكون رقم',
     'messages_pricerequired'=>'السعر لازم يكون مكتوب',
-    'name_form'=>'أضافة عرض جديد'
+    'name_form'=>'أضافة عرض جديد',
+    "name_form_edit"=>"تعديل العرض المطلوب"
 ];

@@ -73,7 +73,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ __('messages.name_form') }}
+                    {{ __('messages.name_form_edit') }}
                 </div>
 
                 @if (Session::has('success'))
@@ -84,42 +84,32 @@
                 @endif
 
 
-                <form method="POST"  action="{{ route('offers_store') }}" enctype="multipart/form-data">
+                <form method="POST"  action="{{ route('offers_update',$offer->id) }}">
                     @csrf
                   {{--   <input name="_token" value="{{ csrf_token() }}"> --}}
                     <div class="form-group">
                       <label for="exampleInputEmail1">Offer Name</label>
-                      <input type="text" class="form-control" name="name" placeholder="Enter Offer Name">
+                      <input type="text" class="form-control" value="{{ $offer->name }}" name="name" placeholder="Enter Offer Name">
                       @error('name')
                       <small class="form-text text-danger">{{$message}}</small>
                       @enderror
                     </div>
-
                     <div class="form-group">
                       <label for="exampleInputPassword1">Offer Price</label>
-                      <input type="text" class="form-control" name="price" placeholder="Enter Price">
+                      <input type="text" class="form-control" value="{{ $offer->price }}" name="price" placeholder="Enter Price">
                       @error('price')
                       <small class="form-text text-danger">{{$message}}</small>
                       @enderror
                     </div>
-
                     <div class="form-group">
                         <label for="exampleInputPassword1">Offer Details</label>
-                        <input type="text" class="form-control" name="details" placeholder="enter Details">
+                        <input type="text" class="form-control" value="{{ $offer->details }}" name="details" placeholder="enter Details">
                         @error('details')
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
-                    </div>
+                      </div>
 
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Photo</label>
-                        <input type="file" class="form-control" name="photo">
-                        @error('photo')
-                        <small class="form-text text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Save Offer</button>
+                    <button type="submit" class="btn btn-primary">Ok Edit Offer</button>
                   </form>
 
             </div>

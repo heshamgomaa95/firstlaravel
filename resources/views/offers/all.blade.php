@@ -83,6 +83,7 @@
                 <th scope="col">Name_Offer</th>
                 <th scope="col">Price_Offer</th>
                 <th scope="col">Details</th>
+                <th scope="col">Update</th>
               </tr>
             </thead>
             <tbody>
@@ -92,7 +93,7 @@
                   <td>{{$offer->name}}</td>
                   <td>{{$offer->price}}</td>
                   <td>{{$offer->details}}</td>
-
+                  <td> <a href="{{url('offers/edit/'.$offer->id)}}" class="btn btn-success">Update</a></td>
                 </tr>
                 @endforeach
             </tbody>
