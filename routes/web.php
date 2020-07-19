@@ -37,12 +37,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::group(['prefix'=>'offers'],function(){
 
-        Route::get('all','CrudController@getAllOffers');
+        Route::get('all','CrudController@getAllOffers')->name('offer_all');
 
         Route::get('form','CrudController@show_form');
         Route::post('store','CrudController@store')->name('offers_store');
 
         Route::get ('edit/{offer_id}','CrudController@editoffer');
         Route::post('update/{offer_id}','CrudController@updateoffer')->name('offers_update');
+
+        Route::get ('delte/{offer_id}','CrudController@deleteoffer')->name('offers_delete');
+
+        Route::get('youtube','CrudController@getvideo');
+
+
     });
 });
+
+###############start Ajax routes##############
+Route::group(['prefix' => 'ajaxoffers'], function () {
+
+    Route::get('create','OfferController@create');
+});
+
+###############End Ajax routes##############

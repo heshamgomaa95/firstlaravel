@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\VedioViewer;
 use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
+use App\Models\Vedio;
+use App\Models\Video;
+use App\Traits\OfferTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
 class CrudController extends Controller
 {
+    use OfferTrait;
     /**
      * Create a new controller instance.
      *
@@ -18,9 +22,20 @@ class CrudController extends Controller
     {
 
     }
+    public function deleteoffer($offer_id){
+        // Offer::where('id','=','$offer_id')->first();
+        $offer=Offer::find($offer_id);
+        if(!$offer){
+            return redirect()->back()->with(['error'=>'تأكد من رقم العرض']);
+        }else{
+            $offer->delete();
+            return redirect()->route('offer_all')->with(['success'=>'تم الحذف بنجاح']);
+        }
+    }
 
     public function editoffer($offer_id)
     {
+
        // Offer::findOrFail($offer_id);
        $offer=Offer::find($offer_id);
        if(!$offer){
@@ -51,7 +66,6 @@ class CrudController extends Controller
     }
 
 
-
     public function getoffers(){
        return Offer::get();
     // return Offer::select('id','name')->get();
@@ -69,43 +83,39 @@ class CrudController extends Controller
     }
 
     public function store(OfferRequest $request){
-
       //  $rules_validaation=$this->get_rules_validaation();
       //  $message=$this->get_message();
             // this array take
-
       //  $validator=Validator::make($request->all(),$rules_validaation,$message);
-
        // if($validator->fails()){
       //  return redirect()->back()->withErrors($validator)->withInput($request->all());
       //   }
 
-
       // save photo in folder
-
       $path_file='images/offers';
       $file_name= $this->saveImage($request->photo, $path_file);
-
         Offer::create([
             'name'=>$request->name,
             'price'=>$request->price,
             'details'=>$request->details,
             'photo'=>$file_name
             ]);
-
        // return 'save successfuly';
        return redirect()->back()->with(['success'=>'تم الاضافه بنجاح']);
-
     }
 
-    protected function saveImage($photo,$folder){
-        $file_extension = $photo->photo->getClientOriginalExtension();
-        $file_name=time().'.'.$file_extension;
-        $path=$folder;
-        $photo->photo->move($path,$file_name);
-        return $file_name;
+
+    public function getvideo(){
+
+       // $vedio=Vedio::select('name','view')->get();
+
+
+        $vedio=Video::first();
+        event(new VedioViewer( $vedio));
+       return view('vedio',compact('vedio'));
     }
-   /* protected function get_rules_validaation(){
+
+    /* protected function get_rules_validaation(){
         return $rules_validaation=[
             'name'=>'required|max:100|unique:offers,name',
             'price'=>'required|numeric',
@@ -122,10 +132,5 @@ class CrudController extends Controller
 
     }
     */
-
-
-
-
-
 
 }

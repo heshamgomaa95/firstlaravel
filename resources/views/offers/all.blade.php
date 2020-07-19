@@ -76,6 +76,19 @@
 
         @include('nevbar.navebar')
 
+        @if(Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+        @endif
+
+        @if(Session::has('error'))
+        <div class="alert alert-danger">
+            {{ Session::get('error') }}
+
+        </div>
+        @endif
+
         <table class="table">
             <thead>
               <tr>
@@ -83,8 +96,10 @@
                 <th scope="col">Name_Offer</th>
                 <th scope="col">Price_Offer</th>
                 <th scope="col">Details</th>
-                <th scope="col">Update</th>
-              </tr>
+                <th scope="col">Operation</th>
+
+
+            </tr>
             </thead>
             <tbody>
                 @foreach ($offers as $offer)
@@ -93,7 +108,11 @@
                   <td>{{$offer->name}}</td>
                   <td>{{$offer->price}}</td>
                   <td>{{$offer->details}}</td>
-                  <td> <a href="{{url('offers/edit/'.$offer->id)}}" class="btn btn-success">Update</a></td>
+                  <td>
+                      <a href="{{url('offers/edit/'.$offer->id)}}" class="btn btn-success">Update</a>
+                      <a href="{{route('offers_delete',$offer->id)}}" class="btn btn-danger">Delete</a>
+                    </td>
+
                 </tr>
                 @endforeach
             </tbody>
