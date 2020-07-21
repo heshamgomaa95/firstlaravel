@@ -8,15 +8,13 @@
                 {{ __('messages.name_form') }}
             </div>
 
-            @if (Session::has('success'))
-             <div class="alert alert-success" role="alert">
-                {{ Session::get('success') }}
-             </div>
-             <br>
-            @endif
+             <div class="alert alert-success" role="alert" id="success_msg" style="display: none;">
+                تم الاضافة بنجاح
+            </div>
 
 
-            <form method="POST"  action="{{ route('offers_store') }}" enctype="multipart/form-data">
+
+            <form method="POST"  id="offerForm" action="" enctype="multipart/form-data">
                 @csrf
               {{--   <input name="_token" value="{{ csrf_token() }}"> --}}
                 <div class="form-group">
@@ -51,7 +49,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary">Save Offer</button>
+                <button id="save_offerajax" class="btn btn-primary">Save Offer</button>
               </form>
 
         </div>
@@ -62,5 +60,28 @@
 @section('scripts')
     <script>
 
+
+        $(document).on('click','#save_offerajax',function(e){
+            e.preventDefault();
+
+            var formData=new FormData($('#offerForm')[0]);
+            $.ajax({
+            type:'post',
+            url:"{{ route('store_ajax') }}",
+            enctype:'multipart/form-data',
+            data:formData,
+            processData:false,
+            contentType:false,
+            cache:false,
+            success: function(data){
+                if(data.status==true){
+                    $('#success_msg').show();
+                }else{
+                    alert(data.msg);
+                }
+            },error: function(reject){
+            }
+            });
+        });
     </script>
 @stop

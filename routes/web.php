@@ -49,7 +49,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
         Route::get('youtube','CrudController@getvideo');
 
-
     });
 });
 
@@ -57,6 +56,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 Route::group(['prefix' => 'ajaxoffers'], function () {
 
     Route::get('create','OfferController@create');
+    Route::post('store','OfferController@store')->name('store_ajax');
+
+    Route::get('all','OfferController@getall')->name('ajaxoffer_all');
+    Route::post('delete','OfferController@delete')->name('delete_ajax');
+
 });
 
 ###############End Ajax routes##############
