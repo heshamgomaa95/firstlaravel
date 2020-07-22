@@ -27,6 +27,7 @@
                       <a href="{{url('offers/edit/'.$offer->id)}}" class="btn btn-success">Update</a>
                       <a href="{{route('offers_delete',$offer->id)}}" class="btn btn-danger">Delete</a>
                       <a href="" offer_id="{{$offer->id}}" class="delete_btn btn btn-danger" >Deleteajax</a>
+                      <a href="{{route('edit_ajax',$offer->id)}}"  class="update_btn btn btn-danger" >edit_ajax</a>
 
                     </td>
 
@@ -39,8 +40,6 @@
 
 @section('scripts')
     <script>
-
-
         $(document).on('click','.delete_btn',function(e){
             e.preventDefault();
 

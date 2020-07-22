@@ -61,6 +61,38 @@ Route::group(['prefix' => 'ajaxoffers'], function () {
     Route::get('all','OfferController@getall')->name('ajaxoffer_all');
     Route::post('delete','OfferController@delete')->name('delete_ajax');
 
+    Route::get ('edit/{offer_id}','OfferController@edit')->name('edit_ajax');
+    Route::post('update','OfferController@update')->name('update_ajax');
+
 });
 
 ###############End Ajax routes##############
+
+
+###############Start authentication && Guards ##############
+Route::group(['middleware' => 'CheckAge','namespace'=>'Auth'], function () {
+
+Route::get('adults','CustomAuthController@Adult')->name('adult');
+
+
+
+});
+
+Route::group(['namespace'=>'Auth'], function () {
+
+Route::get('site','CustomAuthController@site')->middleware('auth:web')->name('user');
+Route::get('admin','CustomAuthController@admin')->middleware('auth:admin')->name('admin');
+});
+
+
+
+
+
+###############End authentication && Guards ##############
+Route::get('/show',function(){
+return 'not adult';
+})->name('not_adult');
+
+
+
+
