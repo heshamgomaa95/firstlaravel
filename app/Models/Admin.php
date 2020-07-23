@@ -1,18 +1,33 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use PhpParser\Node\Expr\AssignOp\Mod;
 
 class Admin extends Authenticatable
 {
-    use Notifiable;
 
-    protected $table="admins";
-    protected $fillable=['name','Email','password'];  //any thing this array can be insert in database
-    protected $hidden = ['password'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password'
+    ];
 
-    public $timestamps=false;   ///  add times in table in insert or update
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+    ];
+
+    protected  $guard  ="admin";
+
 }

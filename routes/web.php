@@ -82,8 +82,14 @@ Route::group(['namespace'=>'Auth'], function () {
 
 Route::get('site','CustomAuthController@site')->middleware('auth:web')->name('user');
 Route::get('admin','CustomAuthController@admin')->middleware('auth:admin')->name('admin');
+
+
 });
 
+
+Route::get('admin/login','Auth\CustomAuthController@admin_login')->name('admin_login');
+
+Route::post('admin/login','Auth\CustomAuthController@checkadminlogin')->middleware('auth:admin')->name('save_admin_login');
 
 
 
