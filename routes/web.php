@@ -102,3 +102,15 @@ return 'not adult';
 
 
 
+
+########### Start Realtion #############
+
+Route::get('has_one','Relation\RelationController@hasOneRelation');
+
+Route::get('get_user_has_phone','Relation\RelationController@GetUserHasPhone');
+
+Route::get('get_user_not_has_phone','Relation\RelationController@GetUserNotHasPhone');
+
+########### End Realtion #############
+
+

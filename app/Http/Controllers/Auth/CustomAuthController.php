@@ -32,20 +32,20 @@ class CustomAuthController extends Controller
     }
 
     public function checkadminlogin(Request $request){
-        return "ok";
 
-        $this->validate($request,[
-            'email'=>'required|email',
-            'password'=>'required:min:6'
-        ]);
+            $this->validate($request, [
+                'email' => 'required|email',
+                'password' => 'required:min:6'
+            ]);
 
-        if (Auth::guard('admin')->attemp(['email' => $request->email, 'password' => $request->password])) {
-            return "ok";
-          //  return redirect()->intended('/admin');
+
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+           // return "ok";
+            return redirect()->intended('/admin');
         }else{
             return "false";
         }
-        return back()->withInput($request->only('email'));
+       // return back()->withInput($request->only('email'));
 
     }
 
