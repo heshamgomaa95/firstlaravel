@@ -20,25 +20,20 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Offer Name</label>
                   <input type="text" class="form-control" name="name" placeholder="Enter Offer Name">
-                  @error('name')
-                  <small class="form-text text-danger">{{$message}}</small>
-                  @enderror
+                  <small id="name_error" class="form-text text-danger"></small>
+
                 </div>
 
                 <div class="form-group">
                   <label for="exampleInputPassword1">Offer Price</label>
                   <input type="text" class="form-control" name="price" placeholder="Enter Price">
-                  @error('price')
-                  <small class="form-text text-danger">{{$message}}</small>
-                  @enderror
+                  <small id="price_error" class="form-text text-danger"></small>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Offer Details</label>
                     <input type="text" class="form-control" name="details" placeholder="enter Details">
-                    @error('details')
-                    <small class="form-text text-danger">{{$message}}</small>
-                    @enderror
+                    <small id="details_error" class="form-text text-danger"></small>
                 </div>
 
                 <div class="form-group">
@@ -64,6 +59,9 @@
         $(document).on('click','#save_offerajax',function(e){
             e.preventDefault();
 
+            $("#name_error").text('');
+            $("#price_error").text('');
+            $("#details_error").text('');
             var formData=new FormData($('#offerForm')[0]);
             $.ajax({
             type:'post',
@@ -80,6 +78,10 @@
                     alert(data.msg);
                 }
             },error: function(reject){
+                var response=$.parseJSON(reject.responseText);
+                $.each(response.errors,function (key,val) {
+                   $("#"+key+"_error").text(val[0]);
+                });
             }
             });
         });

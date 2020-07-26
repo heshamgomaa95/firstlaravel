@@ -111,6 +111,34 @@ Route::get('get_user_has_phone','Relation\RelationController@GetUserHasPhone');
 
 Route::get('get_user_not_has_phone','Relation\RelationController@GetUserNotHasPhone');
 
-########### End Realtion #############
+Route::get('hospital_has_many','Relation\RelationController@GetHospitalDoctors');
+
+
+Route::get('hospitals','Relation\RelationController@hospitals') -> name('hospital_all');
+
+Route::get('doctors/{hospital_id}','Relation\RelationController@doctors')-> name('hospital_doctors');
+
+
+Route::get('hospitals_has_doctors','Relation\RelationController@hospialHasDoctor');
+
+Route::get('hospitals_has_doctors_male','Relation\RelationController@hospialHasOnlyMale');
+
+Route::get('hospitals_not_has_doctors','Relation\RelationController@hospialdosentDoctor');
+
+
+Route::get('hospitals/{hospital_id}','Relation\RelationController@deleteHospital') -> name('hospital_delete');
+
+
+Route::get('doctors_services','Relation\RelationController@getDoctorServices');
+Route::get('services_doctors','Relation\RelationController@getServicesDoctors');
+
+Route::get('doctor/services/{doctor_id}','Relation\RelationController@getDoctorServicesById')->name('doctor_services');
+
+Route::post('saceSewrvice_to_doctor','Relation\RelationController@SaveServiceToDoctor')->name('SaveServiceToDoctor');
+
+
+
+
+########## End Realtion #############
 
 

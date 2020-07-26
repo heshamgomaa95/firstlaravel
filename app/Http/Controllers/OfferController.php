@@ -19,6 +19,7 @@ class OfferController extends Controller
         //save offer into database using AJAX
         $path_file='images/offers';
         $file_name= $this->saveImage($request->photo, $path_file);
+       //insert into table
         $offer=Offer::create([
               'name'=>$request->name,
               'price'=>$request->price,
