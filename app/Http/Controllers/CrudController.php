@@ -7,6 +7,7 @@ use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
 use App\Models\Vedio;
 use App\Models\Video;
+use App\Scopes\OfferScope;
 use App\Traits\OfferTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -77,9 +78,12 @@ class CrudController extends Controller
     }
  //   'name','price','details','created_at','updated_at'
     public function getAllOffers(){
-        $offers=Offer::select('id','name','price','details')->get();
+       // $offers=Offer::select('id','name','price','details')->get();
+        $offers=Offer::select('id','name','price','details')->paginate(PAGINATION_COUNT);
 
-        return view('offers.all',compact('offers'));
+     //   return view('offers.all',compact('offers'));
+        return view('offers.paginations',compact('offers'));
+
     }
 
     public function store(OfferRequest $request){
@@ -115,6 +119,17 @@ class CrudController extends Controller
        return view('vedio',compact('vedio'));
     }
 
+    public function getAllInactiveOffer(){
+
+    // return   $inactive_offer=Offer::where('status','=','0')->get();
+        /// scope
+      //  return   $inactive_offer=Offer::get();
+
+        /// how remove globalscope
+        return   $inactive_offer=Offer::withoutGlobalScope(OfferScope::class)->get();
+
+
+    }
     /* protected function get_rules_validaation(){
         return $rules_validaation=[
             'name'=>'required|max:100|unique:offers,name',

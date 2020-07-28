@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Relation;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\Doctor;
 use App\Models\Hospital;
+use App\Models\Patient;
 use App\Models\Phone;
 use App\Models\Service;
 use App\User;
@@ -105,8 +107,26 @@ class RelationController extends Controller
        if(!$doctor){
            return abort('404');
        }else{
-           $doctor->services()->attach($request->servicesIds);
+          // $doctor->services()->attach($request->servicesIds);
+            //$doctor->services()->sync($request->servicesIds);
+           $doctor->services()->syncWithoutDetaching($request->servicesIds);
+
            return 'success';
        }
+    }
+
+    public function getPatientDoctor(){
+      $patient=Patient::find('2');
+     return $patient->doctor;
+    }
+
+    public function getDoctorCountry(){
+       return $country=Country::with('doctors')->find(1);
+        return $country->doctors;
+    }
+
+    public function getDoctors(){
+       return Doctor::select('id','name','gender')->get();
+
     }
 }

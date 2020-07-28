@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+define('PAGINATION_COUNT',5);
 Route::get('/', function () {
     return view('welcome');
 });
@@ -36,6 +37,9 @@ Route::get('/fillable','CrudController@getoffers');
 Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
 
     Route::group(['prefix'=>'offers'],function(){
+
+        Route::get('inactive_offer','CrudController@getAllInactiveOffer');
+
 
         Route::get('all','CrudController@getAllOffers')->name('offer_all');
 
@@ -134,11 +138,20 @@ Route::get('services_doctors','Relation\RelationController@getServicesDoctors');
 
 Route::get('doctor/services/{doctor_id}','Relation\RelationController@getDoctorServicesById')->name('doctor_services');
 
-Route::post('saceSewrvice_to_doctor','Relation\RelationController@SaveServiceToDoctor')->name('SaveServiceToDoctor');
+Route::post('Save_Service_to_doctor','Relation\RelationController@SaveServiceToDoctor')->name('SaveServiceToDoctor');
 
 
+#######################has one througth#########################
+Route::get('has_one_through','Relation\RelationController@getPatientDoctor');
 
+Route::get('has_many_through','Relation\RelationController@getDoctorCountry');
 
 ########## End Realtion #############
+
+
+####### Accessores and mutatoes ##############
+Route::get('accessors','Relation\RelationController@getDoctors');
+
+
 
 
